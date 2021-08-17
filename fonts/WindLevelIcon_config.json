@@ -1,0 +1,66 @@
+{
+  "name": "WindLevelIcon",
+  "css_prefix_text": "",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "246f0559c57981d0174d6019098ca650",
+      "css": "wind_level_mid",
+      "code": 59392,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M111.1 700H222.2V1000H111.1ZM444.4 500H555.6V1000H444.4Z",
+        "width": 1000
+      },
+      "search": [
+        "wind_level_mid"
+      ]
+    },
+    {
+      "uid": "0d7eddfecffdce0eb6f75a7c9c9e2c70",
+      "css": "wind_level_min",
+      "code": 59393,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M111.1 700H222.2V1000H111.1Z",
+        "width": 1000
+      },
+      "search": [
+        "wind_level_min"
+      ]
+    },
+    {
+      "uid": "3fc58933d5615b5283b41dbfeda6bd6c",
+      "css": "wind_level_max",
+      "code": 59395,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M111.1 700H222.2V1000H111.1ZM777.8 200H888.9V1000H777.8ZM444.4 500H555.6V1000H444.4Z",
+        "width": 1000
+      },
+      "search": [
+        "wind_level_max"
+      ]
+    },
+    {
+      "uid": "7145c30e93d5cc22aa5b1a9eecd3c67d",
+      "css": "wind_level_auto",
+      "code": 59394,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M111.1 700H222.2V1000H111.1ZM777.8 200H888.9V1000H777.8ZM444.4 500H555.6V1000H444.4ZM378.7 412.5H328.1L293.1 313H138.7L103.7 412.5H55.6L185.5 55.6H248.8ZM278.5 272.2L215.9 97 153.1 272.2Z",
+        "width": 1000
+      },
+      "search": [
+        "wind_level_auto"
+      ]
+    }
+  ]
+}

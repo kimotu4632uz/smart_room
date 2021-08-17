@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="126"
+   height="126"
+   viewBox="0 0 126 126"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="wind_level.svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1004" />
+  <sodipodi:namedview
+     id="namedview1002"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="6.6031746"
+     inkscape:cx="63.075721"
+     inkscape:cy="62.924279"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg5" />
+  <path
+     d="M 14,88.2 H 28 V 126 H 14 Z"
+     id="rect4203" />
+  <path
+     d="m 98,25.2 h 14 V 126 H 98 Z"
+     id="rect4205" />
+  <path
+     d="m 56,63 h 14 v 63 H 56 Z"
+     id="rect4207" />
+  <path
+     d="M 47.713409,51.972006 H 41.340613 L 36.931,39.437835 H 17.48038 L 13.070768,51.972006 H 7 L 23.369931,7 h 7.973546 z M 35.088627,34.303354 27.20569,12.225089 19.29255,34.303354 Z"
+     id="path9877" />
+</svg>
