@@ -12,9 +12,12 @@ extension BoolParsing on String {
 
 extension Format on DateTime {
   String hm() {
-    return this.hour.toString().padLeft(2, "0") + ":" + this.minute.toString().padLeft(2, "0");
+    return this.hour.toString().padLeft(2, "0") + ":" +
+        this.minute.toString().padLeft(2, "0");
   }
+}
 
+extension Minutes on TimeOfDay {
   int totalMinute() {
     return (this.hour * 60) + this.minute;
   }

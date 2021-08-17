@@ -228,10 +228,8 @@ class _TimerSetDialogState extends State<TimerSetDialog> {
               );
 
               if (time_result != null) {
-                final finish_time = DateTime(state.time.year, state.time.month, state.time.day, time_result.hour, time_result.minute);
-                if (finish_time.isBefore(state.time)) {
-                  finish_time.add(Duration(days: 1));
-                }
+                final day = time_result.totalMinute() < TimeOfDay.now().totalMinute() ? state.time.day + 1 : state.time.day;
+                final finish_time = DateTime(state.time.year, state.time.month, day, time_result.hour, time_result.minute);
 
                 setState(() {
                   state.time = finish_time;
