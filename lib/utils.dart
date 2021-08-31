@@ -10,6 +10,12 @@ extension BoolParsing on String {
   }
 }
 
+extension IntParsing on String {
+  int parseInt() {
+    return int.parse(this);
+  }
+}
+
 extension Format on DateTime {
   String hm() {
     return this.hour.toString().padLeft(2, "0") + ":" +
@@ -24,26 +30,26 @@ extension Minutes on TimeOfDay {
 }
 
 class CachedBehaviorSubject {
-  final _inner_subject = BehaviorSubject<String>();
+  final _innerSubject = BehaviorSubject<String>();
   String _cache;
 
-  Stream<String> get stream => _inner_subject.stream;
-  StreamSink<String> get sink => _inner_subject.sink;
+  Stream<String> get stream => _innerSubject.stream;
+  StreamSink<String> get sink => _innerSubject.sink;
   String get cache => _cache;
 
   void close() {
-    _inner_subject.close();
+    _innerSubject.close();
   }
 
   CachedBehaviorSubject(String name, String init) : _cache = init {
-    _inner_subject.stream.listen((value) async {
+    _innerSubject.stream.listen((value) async {
       _cache = value;
       final sp = await SharedPreferences.getInstance();
       sp.setString(name, value);
     });
 
     SharedPreferences.getInstance().then((sp) {
-      _inner_subject.sink.add(sp.getString(name) ?? init);
+      _innerSubject.sink.add(sp.getString(name) ?? init);
     });
   }
 }

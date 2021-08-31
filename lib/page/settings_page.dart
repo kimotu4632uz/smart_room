@@ -4,9 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    final theme = NeumorphicTheme.currentTheme(context);
-    return Scaffold(
+  Widget build(BuildContext context) =>
+    Scaffold(
       appBar: NeumorphicAppBar(
         title: NeumorphicText(
           "Settings",
@@ -47,7 +46,7 @@ class SettingsPage extends StatelessWidget {
                   ],
                 ),
                 onPressed: () async {
-                  final aircon_post_url = TextEditingController();
+                  final airconPostUrl = TextEditingController();
 
                   final result = await showDialog(
                       context: context,
@@ -60,7 +59,7 @@ class SettingsPage extends StatelessWidget {
                           ),
                           TextButton(
                             child: Text("OK"),
-                            onPressed: () => Navigator.pop(context, aircon_post_url.text),
+                            onPressed: () => Navigator.pop(context, airconPostUrl.text),
                           ),
                         ],
                         content: Column(
@@ -68,7 +67,7 @@ class SettingsPage extends StatelessWidget {
                           children: [
                             Text("エアコン"),
                             TextField(
-                              controller: aircon_post_url,
+                              controller: airconPostUrl,
                             )
                           ]
                         ),
@@ -110,7 +109,7 @@ class SettingsPage extends StatelessWidget {
                   ],
                 ),
                 onPressed: () async {
-                  final light_post_url = TextEditingController();
+                  final lightPostUrl = TextEditingController();
 
                   final result = await showDialog(
                       context: context,
@@ -123,7 +122,7 @@ class SettingsPage extends StatelessWidget {
                           ),
                           TextButton(
                             child: Text("OK"),
-                            onPressed: () => Navigator.pop(context, light_post_url.text),
+                            onPressed: () => Navigator.pop(context, lightPostUrl.text),
                           ),
                         ],
                         content: Column(
@@ -131,7 +130,7 @@ class SettingsPage extends StatelessWidget {
                           children: [
                             Text("照明"),
                             TextField(
-                              controller: light_post_url,
+                              controller: lightPostUrl,
                             )
                           ]
                         ),
@@ -173,7 +172,7 @@ class SettingsPage extends StatelessWidget {
                   ],
                 ),
                 onPressed: () async {
-                  final room_get_url = TextEditingController();
+                  final roomGetUrl = TextEditingController();
 
                   final result = await showDialog(
                       context: context,
@@ -186,7 +185,7 @@ class SettingsPage extends StatelessWidget {
                           ),
                           TextButton(
                             child: Text("OK"),
-                            onPressed: () => Navigator.pop(context, room_get_url.text),
+                            onPressed: () => Navigator.pop(context, roomGetUrl.text),
                           ),
                         ],
                         content: Column(
@@ -194,7 +193,7 @@ class SettingsPage extends StatelessWidget {
                           children: [
                             Text("部屋状態"),
                             TextField(
-                              controller: room_get_url,
+                              controller: roomGetUrl,
                             )
                           ]
                         ),
@@ -212,5 +211,4 @@ class SettingsPage extends StatelessWidget {
         ],
       )
     );
-  }
 }

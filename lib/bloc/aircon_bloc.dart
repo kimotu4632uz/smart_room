@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'utils.dart';
+import 'package:smart_room/utils.dart';
 
 class Timer {
   late DateTime time;
@@ -47,13 +47,13 @@ class AirconBloc {
       while(true) {
         if (value == "") return;
 
-        final finish_time = Timer.fromString(value);
+        final finishTime = Timer.fromString(value);
 
         if (_subjects[AirconBlocVars.Timer.index].cache != value)
           return;
 
-        if(DateTime.now().isAfter(finish_time.time)) {
-          _subjects[AirconBlocVars.Power.index].sink.add(finish_time.type == "on" ? "true" : "false");
+        if(DateTime.now().isAfter(finishTime.time)) {
+          _subjects[AirconBlocVars.Power.index].sink.add(finishTime.type == "on" ? "true" : "false");
           _subjects[AirconBlocVars.Timer.index].sink.add("");
           return;
         }
@@ -85,7 +85,7 @@ class AirconBloc {
     List<String> values = _subjects.map((e) => e.cache).toList();
     values[name.index] = value;
 
-    final body_obj = {
+    final bodyObj = {
       "power": values[0].parseBool(),
       "temp": int.parse(values[1]),
       "wind_level": values[2],
@@ -97,11 +97,11 @@ class AirconBloc {
     if (values[AirconBlocVars.Timer.index] != "") {
       final timer = Timer.fromString(values[6]);
 
-      body_obj["timer_time"] = timer.time.millisecondsSinceEpoch ~/ 1000;
-      body_obj["timer_type"] = timer.type;
+      bodyObj["timer_time"] = timer.time.millisecondsSinceEpoch ~/ 1000;
+      bodyObj["timer_type"] = timer.type;
     }
 
-    final body = json.encode(body_obj);
+    final body = json.encode(bodyObj);
 
     final resp = await http.post(url, headers: {'content-type': 'application/json'}, body: body);
     print(resp.body);
