@@ -259,7 +259,7 @@ class _TimerSetDialogState extends State<TimerSetDialog> {
 }
 
 void _showTimerPopup(BuildContext context, [Timer? init]) async {
-  final Timer safeinit = init ?? Timer(time: DateTime.now(), type: "off");
+  final Timer safeinit = init ?? Timer(time: DateTime.now(), type: "sleep");
 
   final result = await showDialog(
     context: context,
@@ -378,14 +378,18 @@ class _TimerEditPanelState extends State<TimerEditPanel> {
                       }
                     }
                   ),
-                  if (_expanded)
+
+                  if (!_expanded)
                     NeumorphicIcon(
                       Icons.keyboard_arrow_down_outlined,
                       size: 30,
                       style: NeumorphicStyle(
                         color: Colors.black87
                       )
-                    )
+                    ),
+
+                  if (_expanded)
+                    SizedBox(width: 30),
                 ],
               ),
 
@@ -395,6 +399,8 @@ class _TimerEditPanelState extends State<TimerEditPanel> {
                   thickness: 1.0,
                   height: 20,
                 ),
+
+              if (_expanded)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

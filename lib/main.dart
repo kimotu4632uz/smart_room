@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'package:smart_room/bloc/light_bloc.dart';
@@ -12,6 +13,8 @@ import 'package:smart_room/page/settings_page.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  final locale = Locale("ja", "JP");
+
   @override
   Widget build(BuildContext context) =>
     MultiProvider(
@@ -34,6 +37,15 @@ class MyApp extends StatelessWidget {
           "/light": (context) => LightPage(),
           "/aircon": (context) => AirconPage(),
         },
+        locale: locale,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          locale,
+        ],
         themeMode: ThemeMode.light,
         theme: NeumorphicThemeData(
           baseColor: Color(0xffE9F0F1),

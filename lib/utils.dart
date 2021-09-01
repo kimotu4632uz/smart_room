@@ -53,3 +53,35 @@ class CachedBehaviorSubject {
     });
   }
 }
+
+Future<String?> showTextEditDialog({required BuildContext context, required String title, required String? init}) async {
+  final controller = TextEditingController(text: init);
+
+  final String? result = await showDialog(
+    context: context,
+    barrierDismissible: true,
+    builder: (context) => AlertDialog(
+      actions: [
+        TextButton(
+          child: Text("Cancel"),
+          onPressed: () => Navigator.pop(context),
+        ),
+        TextButton(
+          child: Text("OK"),
+          onPressed: () => Navigator.pop(context, controller.text),
+        ),
+      ],
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(title),
+          TextField(
+            controller: controller,
+          )
+        ]
+      ),
+    )
+  );
+
+  return result;
+}

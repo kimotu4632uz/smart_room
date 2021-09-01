@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+
+import 'package:smart_room/utils.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
@@ -17,198 +20,159 @@ class SettingsPage extends StatelessWidget {
         children: [
           Column(
             children: [
-              NeumorphicButton(
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-                child: Column(
-                  children: [
-                    NeumorphicText(
-                      "エアコンpost先URL",
-                      style: NeumorphicStyle(
-                        color: Colors.black87,
-                      ),
-                      textStyle: NeumorphicTextStyle(
-                        fontSize: 20
-                      ),
-                    ),
-                    FutureBuilder(
-                      future: SharedPreferences.getInstance().then((sp) => sp.getString("aircon_post_url") ?? ""),
-                      builder: (_, AsyncSnapshot<String> snapshot) =>
-                        NeumorphicText(
-                          snapshot.data ?? "",
-                          style: NeumorphicStyle(
-                            color: Colors.black45
-                          ),
-                          textStyle: NeumorphicTextStyle(
-                            fontSize: 15
-                          ),
-                        ),
-                    )
-                  ],
-                ),
-                onPressed: () async {
-                  final airconPostUrl = TextEditingController();
+             FutureBuilder(
+                future: SharedPreferences.getInstance().then((sp) => sp.getString("light_post_url") ?? ""),
+                builder: (context, AsyncSnapshot<String> snapshot) =>
+                  SettingButton(
+                    title: "照明POST用URL",
+                    innerText: snapshot.data ?? "",
+                    icon: Icons.edit,
+                    onPressed: (text, update) async {
+                      final result = await showTextEditDialog(
+                          context: context,
+                          title: "照明",
+                          init: snapshot.data
+                      );
 
-                  final result = await showDialog(
-                      context: context,
-                      barrierDismissible: true,
-                      builder: (context) => AlertDialog(
-                        actions: [
-                          TextButton(
-                            child: Text("Cancel"),
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                          TextButton(
-                            child: Text("OK"),
-                            onPressed: () => Navigator.pop(context, airconPostUrl.text),
-                          ),
-                        ],
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text("エアコン"),
-                            TextField(
-                              controller: airconPostUrl,
-                            )
-                          ]
-                        ),
-                      )
-                  );
-
-                  if (result != null) {
-                    final sp = await SharedPreferences.getInstance();
-                    sp.setString("aircon_post_url", result);
-                  }
-                },
+                      if (result != null) {
+                        final sp = await SharedPreferences.getInstance();
+                        sp.setString("light_post_url", result);
+                        update(result);
+                      }
+                    },
+                  ),
               ),
-              NeumorphicButton(
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-                child: Column(
-                  children: [
-                    NeumorphicText(
-                      "照明post先URL",
-                      style: NeumorphicStyle(
-                        color: Colors.black87,
-                      ),
-                      textStyle: NeumorphicTextStyle(
-                        fontSize: 20
-                      ),
-                    ),
-                    FutureBuilder(
-                      future: SharedPreferences.getInstance().then((sp) => sp.getString("light_post_url") ?? ""),
-                      builder: (_, AsyncSnapshot<String> snapshot) =>
-                        NeumorphicText(
-                          snapshot.data ?? "",
-                          style: NeumorphicStyle(
-                            color: Colors.black45
-                          ),
-                          textStyle: NeumorphicTextStyle(
-                            fontSize: 15
-                          ),
-                        ),
-                    )
-                  ],
-                ),
-                onPressed: () async {
-                  final lightPostUrl = TextEditingController();
+              FutureBuilder(
+                future: SharedPreferences.getInstance().then((sp) => sp.getString("aircon_post_url") ?? ""),
+                builder: (context, AsyncSnapshot<String> snapshot) =>
+                  SettingButton(
+                    title: "エアコンPOST用URL",
+                    innerText: snapshot.data ?? "",
+                    icon: Icons.edit,
+                    onPressed: (text, update) async {
+                      final result = await showTextEditDialog(
+                          context: context,
+                          title: "エアコン",
+                          init: snapshot.data
+                      );
 
-                  final result = await showDialog(
-                      context: context,
-                      barrierDismissible: true,
-                      builder: (context) => AlertDialog(
-                        actions: [
-                          TextButton(
-                            child: Text("Cancel"),
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                          TextButton(
-                            child: Text("OK"),
-                            onPressed: () => Navigator.pop(context, lightPostUrl.text),
-                          ),
-                        ],
-                        content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text("照明"),
-                            TextField(
-                              controller: lightPostUrl,
-                            )
-                          ]
-                        ),
-                      )
-                  );
-
-                  if (result != null) {
-                    final sp = await SharedPreferences.getInstance();
-                    sp.setString("light_post_url", result);
-                  }
-                },
+                      if (result != null) {
+                        final sp = await SharedPreferences.getInstance();
+                        sp.setString("aircon_post_url", result);
+                        update(result);
+                      }
+                    },
+                  ),
               ),
-              NeumorphicButton(
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-                child: Column(
-                  children: [
-                    NeumorphicText(
-                      "部屋状態get先URL",
-                      style: NeumorphicStyle(
-                        color: Colors.black87,
-                      ),
-                      textStyle: NeumorphicTextStyle(
-                        fontSize: 20
-                      ),
-                    ),
-                    FutureBuilder(
-                      future: SharedPreferences.getInstance().then((sp) => sp.getString("room_get_url") ?? ""),
-                      builder: (_, AsyncSnapshot<String> snapshot) =>
-                        NeumorphicText(
-                          snapshot.data ?? "",
-                          style: NeumorphicStyle(
-                            color: Colors.black45
-                          ),
-                          textStyle: NeumorphicTextStyle(
-                            fontSize: 15
-                          ),
-                        ),
-                    )
-                  ],
-                ),
-                onPressed: () async {
-                  final roomGetUrl = TextEditingController();
+              FutureBuilder(
+                future: SharedPreferences.getInstance().then((sp) => sp.getString("room_get_url") ?? ""),
+                builder: (context, AsyncSnapshot<String> snapshot) =>
+                  SettingButton(
+                    title: "部屋状態GET用URL",
+                    innerText: snapshot.data ?? "",
+                    icon: Icons.edit,
+                    onPressed: (text, update) async {
+                      final result = await showTextEditDialog(
+                        context: context,
+                        title: "部屋状態",
+                        init: snapshot.data
+                      );
 
-                  final result = await showDialog(
-                      context: context,
-                      barrierDismissible: true,
-                      builder: (context) => AlertDialog(
-                        actions: [
-                          TextButton(
-                            child: Text("Cancel"),
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                          TextButton(
-                            child: Text("OK"),
-                            onPressed: () => Navigator.pop(context, roomGetUrl.text),
-                          ),
-                        ],
-                        content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text("部屋状態"),
-                            TextField(
-                              controller: roomGetUrl,
-                            )
-                          ]
-                        ),
-                      )
-                  );
-
-                  if (result != null) {
-                    final sp = await SharedPreferences.getInstance();
-                    sp.setString("room_get_url", result);
-                  }
-                },
-              )
+                      if (result != null) {
+                        final sp = await SharedPreferences.getInstance();
+                        sp.setString("room_get_url", result);
+                        update(result);
+                      }
+                    },
+                  ),
+              ),
+              FutureBuilder(
+                future: PackageInfo.fromPlatform().then((value) => value.version),
+                builder: (context, AsyncSnapshot<String> snapshot) =>
+                  SettingButton(
+                    title: "バージョン番号",
+                    innerText: snapshot.data ?? "",
+                    icon: Icons.info_outline_rounded,
+                    onPressed: (_, f) {},
+                  )
+              ),
             ],
           )
         ],
       )
     );
+}
+
+
+class SettingButton extends StatefulWidget {
+  final String title;
+  final IconData icon;
+  final String innerText;
+  final void Function(String text, Function(String) update) onPressed;
+
+  SettingButton({required this.title, required this.icon, required this.onPressed, required this.innerText});
+
+  _SettingButtonState createState() => _SettingButtonState();
+}
+
+class _SettingButtonState extends State<SettingButton> {
+  String innerText = "";
+
+  @override
+  void initState() {
+    super.initState();
+    innerText = widget.innerText;
+  }
+
+  @override
+  void didUpdateWidget(covariant SettingButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    innerText = widget.innerText;
+  }
+
+  @override
+  Widget build(BuildContext context) =>
+      NeumorphicButton(
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: Container(
+          width: double.infinity,
+          child: Row(
+            children: [
+              NeumorphicIcon(
+                widget.icon,
+                style: NeumorphicStyle(
+                  color: Colors.black87
+                ),
+                size: 25,
+              ),
+              SizedBox(width: 40),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  NeumorphicText(
+                    widget.title,
+                    style: NeumorphicStyle(
+                      color: Colors.black87,
+                    ),
+                    textStyle: NeumorphicTextStyle(
+                      fontSize: 18
+                    ),
+                  ),
+                  SizedBox(height: 2),
+                  NeumorphicText(
+                    innerText,
+                    style: NeumorphicStyle(
+                      color: Colors.black45
+                    ),
+                    textStyle: NeumorphicTextStyle(
+                      fontSize: 15
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        onPressed: () => widget.onPressed(innerText, (text) => setState(() { innerText = text; })),
+      );
 }
